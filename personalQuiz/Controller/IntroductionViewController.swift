@@ -9,12 +9,13 @@ import UIKit
 
 class IntroductionViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    @IBAction  func unwind(_ sender: UIStoryboardSegue) {
        
-    }
+    dismiss(animated: true)
+
 
 
 }
+    
 
+}

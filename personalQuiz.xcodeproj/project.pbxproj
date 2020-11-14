@@ -72,7 +72,6 @@
 				55551B5B255DAC7B00FC4EE3 /* View */,
 				55551B49255DAC5400FC4EE3 /* Controller */,
 				55551B5D255DACB100FC4EE3 /* support */,
-				55551B42255DAC3100FC4EE3 /* Info.plist */,
 			);
 			path = personalQuiz;
 			sourceTree = "<group>";
@@ -91,8 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				55551B53255DAC5B00FC4EE3 /* Question.swift */,
-				55551B55255DAC5B00FC4EE3 /* Answer.swift */,
 				55551B54255DAC5B00FC4EE3 /* ResponseType.swift */,
+				55551B55255DAC5B00FC4EE3 /* Answer.swift */,
 				55551B52255DAC5B00FC4EE3 /* AnimalType.swift */,
 			);
 			path = model;
@@ -113,6 +112,7 @@
 				55551B34255DAC3000FC4EE3 /* AppDelegate.swift */,
 				55551B36255DAC3000FC4EE3 /* SceneDelegate.swift */,
 				55551B3D255DAC3100FC4EE3 /* Assets.xcassets */,
+				55551B42255DAC3100FC4EE3 /* Info.plist */,
 			);
 			path = support;
 			sourceTree = "<group>";
@@ -336,7 +336,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52VQD83LB6;
-				INFOPLIST_FILE = personalQuiz/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/personalQuiz/support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -355,7 +355,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52VQD83LB6;
-				INFOPLIST_FILE = personalQuiz/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/personalQuiz/support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -27,10 +27,10 @@ extension Question {
         ]
         ),
             Question(text: "Любите ли ВЫ поездки на машине", type: .ranged, answers: [
-                Answer(text: "обожаю", type: .dog),
-                Answer(text: "Ненавижу", type: .cat),
-                Answer(text: "Незамичаю", type: .rabbit),
-                Answer(text: "Нелюблю", type: .turtle)
+                Answer(text: "Ненавижу", type: .dog),
+                Answer(text: "Нервничаю", type: .cat),
+                Answer(text: "Не замичаю", type: .rabbit),
+                Answer(text: "Обожаю", type: .turtle)
         ]
         )
         ]

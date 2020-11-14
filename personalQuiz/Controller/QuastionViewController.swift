@@ -11,7 +11,7 @@ class QuastionViewController: UIViewController {
     
     @IBOutlet var quastionLabel: UILabel!
     @IBOutlet var singleStackView: UIStackView!
-    @IBOutlet var singleButtoms: [UIButton]!
+    @IBOutlet var singleButtons: [UIButton]!
     
     @IBOutlet var multipleSwitches: [UISwitch]!
     @IBOutlet var multipleStackView: UIStackView!
@@ -27,12 +27,17 @@ class QuastionViewController: UIViewController {
     // Mark private - proporties
     private let quastions = Question.getQuestions()
     private var questionIndex = 0
-
+    private var answersChoosen: [Answer] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+            updateUI()
     }
+    
+    
+    
+    
  
     
     // Mark private Methods
@@ -55,7 +60,7 @@ class QuastionViewController: UIViewController {
         quastionLabel.text = currentQuastion.text
         
         // Set progress to the quastionProgressView
-        let totalProgress = Float(questionIndex / quastions.count)
+        let totalProgress = Float(Float(questionIndex) / Float(quastions.count))
         
         // Calculate progress
         quastionsProgressView.setProgress(totalProgress, animated: true)
@@ -71,22 +76,109 @@ class QuastionViewController: UIViewController {
         case .single:
             updateSingleStackView(using: currentAnswers)
         case .multiple:
-            break
+            updateMultipleStackView(using: currentAnswers)
         case .ranged:
-            break
+            updateRangedStackView(using: currentAnswers)
         
         }
         
         
     }
+    // Mark : - IB Actions
     
-    /// setup single stack View
+    @IBAction func singleAnswerButtonPressed(_ sender: UIButton) {
+        let currentAnswers = quastions[questionIndex].answers
+        guard let currentIndex = singleButtons.firstIndex(of: sender) else { return }
+        
+       let currentAnswer = currentAnswers[currentIndex]
+        answersChoosen.append(currentAnswer)
+        nextQuestion()
+        
+    }
+    
+    @IBAction func multipleAnswerAction() {
+        
+       let currentAnswers = quastions[questionIndex].answers
+        for (multipleSwitch, answer) in zip(multipleSwitches, currentAnswers) {
+            if multipleSwitch.isOn {
+                answersChoosen.append(answer)
+            }
+            
+        }
+        nextQuestion()
+    }
+    
+    @IBAction func rangeAnswersButtonPressed() {
+        
+        let currentAnswers = quastions[questionIndex].answers
+        let index = Int(rangeSlider.value * Float(currentAnswers.count - 1))
+        answersChoosen.append(currentAnswers[index])
+        nextQuestion()
+    }
+    
+    
+    /// Setup single stack View
     /// - Parameter answers: - array with answers
     ///
     /// Description of method
+    
     private func updateSingleStackView(using answers: [Answer]) {
         // show single stack View
         singleStackView.isHidden = false
+        
+       for (button, answer) in zip(singleButtons, answers) {
+        button.setTitle(answer.text, for: .normal )
+       }
+    }
+    
+    /// Setup multiple stack View
+    /// - Parameter answers: - array with answers
+    ///
+    /// Description of method
+    
+    private func updateMultipleStackView(using answers: [Answer]) {
+        // show multiple stack View
+        multipleStackView.isHidden = false
+        for (label, answer) in zip(multipleLable, answers) {
+            label.text = answer.text
+        }
+    }
+    
+    
+    /// Setup ranged
+    /// - Parameter answers: - array with answers
+    ///
+    /// Description of method
+    
+    private func updateRangedStackView(using answers: [Answer]) {
+        // show ranged stack View
+        rangedStackView.isHidden = false
+        
+        rangeLabels.first?.text = answers.first?.text
+        rangeLabels.last?.text = answers.last?.text
+    }
+    
+    //  Mark: Show next question or go to the next screen
+
+    private func nextQuestion(){
+        
+        // Todo: Implement the function
+        
+        questionIndex += 1
+        
+        if questionIndex < quastions.count {
+            updateUI()
+        } else {
+            performSegue(withIdentifier: "resultSegue", sender: nil)
+        }
+        
+            
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "resultSegue" else { return }
+        let resultVC = segue.destination as! ResultViewController
+        resultVC.responses = answersChoosen
     }
 
 }
